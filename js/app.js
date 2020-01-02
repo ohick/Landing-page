@@ -18,24 +18,15 @@
  * 
 */
 
-  const sections = document.querySelectorAll('section[data-nav]');
+const sections = document.querySelectorAll('section[data-nav]');
+const navBar = document.getElementById('navbar__list');
 
-  for (let section of sections) {
-      const navList = document.createElement('li');
-      const links = document.createElement('a');
-      links.textContent = section.querySelector('h2').textContent;
-      links.href = `#${links.textContent.replace(/\s+/g, '').toLowerCase()}`;
-      navList.appendChild(links);
-      document.getElementById('navbar__list').appendChild(navList);
-    }
-  
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
 
 
 /**
@@ -46,12 +37,54 @@
 
 // build the nav
 
+//createNavBar(sections, navBar);
+
+let createNavBar = (sections, navBar) => {
+  for (const section of sections) {
+    const data = section.getAttribute('data-nav');
+    const href = section.getAttribute('id');
+
+    const navList = document.createElement('li');
+    const link = document.createElement('a');
+    link.href=`#${href}`;
+    link.textContent=data;
+    link.className="menu__link";
+    //console.log(link);
+    //navList.innerHTML = `<a href="#${href}" class = "menu__link">${data}</a>`;
+    navList.appendChild(link);
+    //console.log(navList);
+
+    navBar.appendChild(navList);
+  }
+  return navBar;
+};
+
 
 // Add class 'active' to section when near top of viewport
 
+let highlight = () => {
+  let flag = false;
+
+  for (const section of sections) {
+    const position = section.getBoundingClientRect().top;
+    if (!flag && position > 0) {
+      section.classList.add("your-active-class");
+      flag = true;
+    } else {
+      section.classList.remove("your-active-class");
+    }
+  }
+}
 
 // Scroll to anchor ID using scrollTO event
 
+let scrolling = () => {
+  let hashValue = item.getAttribute("href");
+  let target = document.querySelector(hashValue);
+  target.scrollIntoView({
+    behavior: 'smooth',
+  })
+}
 
 /**
  * End Main Functions
@@ -61,8 +94,15 @@
 
 // Build menu 
 
+document.addEventListener("DOMContentLoaded", createNavBar(sections, navBar));
+
 // Scroll to section on link click
 
+
 // Set sections as active
+
+document.addEventListener("scroll", highlight);
+
+
 
 
