@@ -1,3 +1,4 @@
+"use strict";
 /**
  * 
  * Manipulating the DOM exercise.
@@ -17,11 +18,8 @@
  * Define Global Variables
  * 
 */
-
 const sections = document.querySelectorAll('section[data-nav]');
 const navBar = document.getElementById('navbar__list');
-
-
 /**
  * End Global Variables
  * Start Helper Functions
@@ -36,35 +34,25 @@ const navBar = document.getElementById('navbar__list');
 */
 
 // build the nav
-
-//createNavBar(sections, navBar);
-
-let createNavBar = (sections, navBar) => {
+let createNavBarChildren = (sections) => {
+  let child = document.createDocumentFragment();
   for (const section of sections) {
     const data = section.getAttribute('data-nav');
     const href = section.getAttribute('id');
-
     const navList = document.createElement('li');
     const link = document.createElement('a');
-    link.href=`#${href}`;
-    link.textContent=data;
-    link.className="menu__link";
-    //console.log(link);
-    //navList.innerHTML = `<a href="#${href}" class = "menu__link">${data}</a>`;
+    link.href = `#${href}`;
+    link.textContent = data;
+    link.className = "menu__link";
     navList.appendChild(link);
-    //console.log(navList);
-
-    navBar.appendChild(navList);
+    child.appendChild(navList);
   }
-  return navBar;
+  return child;
 };
 
-
 // Add class 'active' to section when near top of viewport
-
 let highlight = () => {
   let flag = false;
-
   for (const section of sections) {
     const position = section.getBoundingClientRect().top;
     if (!flag && position > 0) {
@@ -78,13 +66,6 @@ let highlight = () => {
 
 // Scroll to anchor ID using scrollTO event
 
-let scrolling = () => {
-  let hashValue = item.getAttribute("href");
-  let target = document.querySelector(hashValue);
-  target.scrollIntoView({
-    behavior: 'smooth',
-  })
-}
 
 /**
  * End Main Functions
@@ -93,16 +74,18 @@ let scrolling = () => {
 */
 
 // Build menu 
-
-document.addEventListener("DOMContentLoaded", createNavBar(sections, navBar));
+document.addEventListener("DOMContentLoaded", navBar.appendChild(createNavBarChildren(sections)));
 
 // Scroll to section on link click
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+      e.preventDefault();
 
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+});
 
 // Set sections as active
-
 document.addEventListener("scroll", highlight);
-
-
-
-
