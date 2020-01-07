@@ -90,6 +90,10 @@ section {
     transition: ease 0.3s all;
 }
 
+.icon {
+    display: none;
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
@@ -248,19 +252,19 @@ section.your-active-class .landing__container::after {
 
 /*Back to top Button*/
 #myBtn {
-    position: fixed; /* Fixed/sticky position */
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 30px; /* Place the button 30px from the right */
-    z-index: 99; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
-    outline: none; /* Remove outline */
+    position: fixed;
+    bottom: 20px; 
+    right: 30px; 
+    z-index: 99; 
+    border: none; 
+    outline: none; 
     background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
-    color: white; /* Text color */
-    cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 15px; /* Some padding */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 18px; /* Increase font size */
+    background: rgba(255,255,255,.1);
+    color: white; 
+    cursor: pointer; 
+    padding: 15px; 
+    border-radius: 10px; 
+    font-size: 18px;
 }
 
 .show-fadein {
@@ -279,9 +283,10 @@ section.your-active-class .landing__container::after {
 }
 
 #myBtn:hover {
-    background-color: #555; /* Add a dark-grey background on hover */
+    background: rgba(255,255,255,.3); /* Add a dark-grey background on hover */
 }
 
+/* Button fade in and fade out */
 @keyframes fadein {
     0% {
         opacity: 0;
@@ -300,4 +305,23 @@ section.your-active-class .landing__container::after {
     }
 }
 
-/*Header slide*/
+
+
+@media (max-width: 34em) {
+    #navbar__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #myBtn {
+        right: 10px; 
+        padding: 5px; 
+        border-radius: 5px; 
+        font-size: 14px; 
+    }
+
+    main {
+        margin-top: 250px;
+    }
+}

@@ -29,7 +29,7 @@ const header = document.querySelector('.page__header');
  * 
 */
 
-let timerHide = (el) => el.classList.add("hide");
+let timerHide = (el) => el.classList.add('hide');
 
 /**
  * End Helper Functions
@@ -47,7 +47,7 @@ let createNavBarChildren = (sections) => {
     const link = document.createElement('a');
     link.href = `#${href}`;
     link.textContent = data;
-    link.className = "menu__link";
+    link.className = 'menu__link';
     li.appendChild(link);
     child.appendChild(li);
   }
@@ -57,7 +57,7 @@ let createNavBarChildren = (sections) => {
 // Add class 'active' to section when near top of viewport
 let highlight = (sections) => {
   let flag = false;
-  let classValue = "your-active-class";
+  let classValue = 'your-active-class';
   for (const section of sections) {
     const position = section.getBoundingClientRect().top;
     if (!flag && position >= -200) {
@@ -67,7 +67,7 @@ let highlight = (sections) => {
       section.classList.remove(classValue);
     }
   }
-}
+};
 
 // Hide menu when scrolling
 /* let hideMenu = () => {
@@ -81,18 +81,17 @@ let showMenu = () => {
   header.classList.remove("slide-out", "hide");
   header.classList.add("slide-in");
 } */
-
 let lastScrollTop = 0;
 
 let menuSlide = () => {
-  var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+  let st = window.pageYOffset || document.documentElement.scrollTop;
   if (st > lastScrollTop) {
-    header.classList.remove("slide-in");
-    header.classList.add("slide-out");
+    header.classList.remove('slide-in');
+    header.classList.add('slide-out');
     setTimeout(() => timerHide(header), 250);
   } else {
-    header.classList.remove("slide-out", "hide");
-    header.classList.add("slide-in");
+    header.classList.remove('slide-out', 'hide');
+    header.classList.add('slide-in');
   }
   lastScrollTop = st <= 0 ? 0 : st;
 };
@@ -100,14 +99,14 @@ let menuSlide = () => {
 // Scroll to top button appears
 let buttonShows = () => {
   if (window.scrollY) {
-    mybutton.classList.remove("hide", "fadeout");
-    mybutton.classList.add("show-fadein");
+    mybutton.classList.remove('hide', 'fadeout');
+    mybutton.classList.add('show-fadein');
   } else {
-    mybutton.classList.remove("show-fadein");
-    mybutton.classList.add("fadeout");
+    mybutton.classList.remove('show-fadein');
+    mybutton.classList.add('fadeout');
     setTimeout(() => timerHide(mybutton), 500);
   }
-}
+};
 
 // Scroll to top event
 let backToTop = () => {
@@ -116,7 +115,7 @@ let backToTop = () => {
     left: 0,
     behavior: 'smooth'
   });
-}
+};
 
 /**
  * End Main Functions
@@ -125,7 +124,7 @@ let backToTop = () => {
 */
 
 // Build menu 
-document.addEventListener("DOMContentLoaded", navBar.appendChild(createNavBarChildren(sections)));
+document.addEventListener('DOMContentLoaded', navBar.appendChild(createNavBarChildren(sections)));
 
 // Scroll to section on link click
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -137,14 +136,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Set sections as active
-// Hide menu when scrolling
-// Back to top button appears when scrolling
-document.addEventListener("scroll", () => {
+/* Set sections as active
+Hide menu when scrolling
+Back to top button appears when scrolling */
+document.addEventListener('scroll', () => {
   buttonShows();
   highlight(sections);
   menuSlide();
 });
 
-// When the user clicks on the button, scroll to the top of the document
+// Scroll to the top of the document
 mybutton.addEventListener('click', () => backToTop());
