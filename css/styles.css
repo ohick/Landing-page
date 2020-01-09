@@ -98,28 +98,6 @@ section {
     z-index: 5;
 }
 
-.slide-in {
-    animation: slidein 1s forwards;
-    top: -100px;
-}
-
-.slide-out {
-    animation: slideout 1s backwards;
-    top: 0px;
-}
-
-@keyframes slidein {
-    100% {
-        top: 0px;
-    }
-}
-
-@keyframes slideout {
-    100% {
-        top: -100px;
-    }
-}
-
 /* Footer Styles */
 .page__footer {
     background: #000;
@@ -282,7 +260,7 @@ section.your-active-class .landing__container::after {
 }
 
 #myBtn:hover {
-    background: rgba(255,255,255,.3); /* Add a dark-grey background on hover */
+    background: rgba(255,255,255,.3);
 }
 
 /* Button fade in and fade out */
@@ -303,8 +281,6 @@ section.your-active-class .landing__container::after {
         opacity: 0;
     }
 }
-
-
 
 @media (max-width: 34em) {
     #navbar__list {
