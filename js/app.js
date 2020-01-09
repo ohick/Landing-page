@@ -48,6 +48,7 @@ let createNavBarChildren = (sections) => {
     link.href = `#${href}`;
     link.textContent = data;
     link.className = 'menu__link';
+    link.id = `sct${data.slice(-1)}`;
     li.appendChild(link);
     child.appendChild(li);
   }
@@ -60,40 +61,16 @@ let highlight = (sections) => {
   let classValue = 'your-active-class';
   for (const section of sections) {
     const position = section.getBoundingClientRect().top;
-    if (!flag && position >= -200) {
-      section.classList.add(classValue);
+    const link = document.getElementById(`sct${section.id.slice(-1)}`);
+    if (!flag && position >= -250) {
+      section.classList.add(classValue)
+      link.classList.add('your-active-link');
       flag = true;
     } else {
       section.classList.remove(classValue);
+      link.classList.remove('your-active-link');
     }
   }
-};
-
-// Hide menu when scrolling
-/* let hideMenu = () => {
-  header.classList.remove("slide-in");
-  header.classList.add("slide-out");
-  setTimeout(() => timerHide(header), 500);
-  setTimeout(() => showMenu(), 1500);
-}
-
-let showMenu = () => {
-  header.classList.remove("slide-out", "hide");
-  header.classList.add("slide-in");
-} */
-let lastScrollTop = 0;
-
-let menuSlide = () => {
-  let st = window.pageYOffset || document.documentElement.scrollTop;
-  if (st > lastScrollTop) {
-    header.classList.remove('slide-in');
-    header.classList.add('slide-out');
-    setTimeout(() => timerHide(header), 250);
-  } else {
-    header.classList.remove('slide-out', 'hide');
-    header.classList.add('slide-in');
-  }
-  lastScrollTop = st <= 0 ? 0 : st;
 };
 
 // Scroll to top button appears
@@ -137,12 +114,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* Set sections as active
-Hide menu when scrolling
 Back to top button appears when scrolling */
 document.addEventListener('scroll', () => {
   buttonShows();
   highlight(sections);
-  menuSlide();
 });
 
 // Scroll to the top of the document
